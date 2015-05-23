@@ -1,0 +1,254 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+  var cwidth,cheight,cy,cx;
+  var ctx;
+  var gridlocation;
+  
+  function drawShape(){
+    var canvas = document.getElementById('board');
+   	cwidth = canvas.width/8;
+   	cheight = canvas.height/8;
+   	cx = canvas.offsetLeft + 20;
+    cy = canvas.offsetTop + 20;
+ 
+    if (canvas.getContext){
+      ctx = canvas.getContext('2d');
+  	  for(var i = 0; i < 8; i++){
+  	  	drawLineGrid(i);
+  	  }
+  	  initGridLocation();
+  	  initieces();
+    } else {
+      alert('You need Safari or Firefox 1.5+ to see this demo.');
+    }
+    setLocation('blacksoldiers1', 1003);
+  }
+  
+  function getY(y){
+  	return cy + (y * cheight) + 15;
+  }
+  
+  function getX(x){
+  	return cx + (x * cwidth) + 15;
+  }
+  
+  function drawLineGrid(lineNum){
+  	if(lineNum%2 == 0){
+  		drawBlackGrid(lineNum,0);
+  		drawWidthGrid(lineNum,1);
+  		drawBlackGrid(lineNum,2);
+  		drawWidthGrid(lineNum,3);
+  		drawBlackGrid(lineNum,4);
+  		drawWidthGrid(lineNum,5);
+  		drawBlackGrid(lineNum,6);
+  		drawWidthGrid(lineNum,7);
+  	}else{
+  		drawWidthGrid(lineNum,0);
+  		drawBlackGrid(lineNum,1);
+  		drawWidthGrid(lineNum,2);
+  		drawBlackGrid(lineNum,3);
+  		drawWidthGrid(lineNum,4);
+  		drawBlackGrid(lineNum,5);
+  		drawWidthGrid(lineNum,6);
+  		drawBlackGrid(lineNum,7);
+  	}
+  }
+  
+  function drawWidthGrid(lineNum, where){
+  	ctx.fillStyle="#D2C2B9";
+    ctx.fillRect(cheight*lineNum, cwidth*where, cwidth, cheight);
+  }
+  
+  function drawBlackGrid(lineNum, where){
+  	ctx.fillStyle="#6D4B41";
+    ctx.fillRect(cheight*lineNum, cwidth*where, cwidth, cheight);
+  }
+  
+  function initGridLocation(){
+  	  var str= 
+  	  '{"1001":{"y":'+getY(0)+', "x":'+getX(0)+'},'+
+  	  '"1002":{"y":'+getY(0)+', "x":'+getX(1)+'},'+
+  	  '"1003":{"y":'+getY(0)+', "x":'+getX(2)+'},'+
+  	  '"1004":{"y":'+getY(0)+', "x":'+getX(3)+'},'+
+  	  '"1005":{"y":'+getY(0)+', "x":'+getX(4)+'},'+
+  	  '"1006":{"y":'+getY(0)+', "x":'+getX(5)+'},'+
+  	  '"1007":{"y":'+getY(0)+', "x":'+getX(6)+'},'+
+  	  '"1008":{"y":'+getY(0)+', "x":'+getX(7)+'},'+
+  	  '"1009":{"y":'+getY(1)+', "x":'+getX(0)+'},'+
+  	  '"1010":{"y":'+getY(1)+', "x":'+getX(1)+'},'+
+  	  '"1011":{"y":'+getY(1)+', "x":'+getX(2)+'},'+
+  	  '"1012":{"y":'+getY(1)+', "x":'+getX(3)+'},'+
+  	  '"1013":{"y":'+getY(1)+', "x":'+getX(4)+'},'+
+  	  '"1014":{"y":'+getY(1)+', "x":'+getX(5)+'},'+
+  	  '"1015":{"y":'+getY(1)+', "x":'+getX(6)+'},'+
+  	  '"1016":{"y":'+getY(1)+', "x":'+getX(7)+'},'+
+  	  '"1017":{"y":'+getY(2)+', "x":'+getX(0)+'},'+
+  	  '"1018":{"y":'+getY(2)+', "x":'+getX(1)+'},'+
+  	  '"1019":{"y":'+getY(2)+', "x":'+getX(2)+'},'+
+  	  '"1020":{"y":'+getY(2)+', "x":'+getX(3)+'},'+
+  	  '"1021":{"y":'+getY(2)+', "x":'+getX(4)+'},'+
+  	  '"1022":{"y":'+getY(2)+', "x":'+getX(5)+'},'+
+  	  '"1023":{"y":'+getY(2)+', "x":'+getX(6)+'},'+
+  	  '"1024":{"y":'+getY(2)+', "x":'+getX(7)+'},'+
+  	  '"1025":{"y":'+getY(3)+', "x":'+getX(0)+'},'+
+  	  '"1026":{"y":'+getY(3)+', "x":'+getX(1)+'},'+
+  	  '"1027":{"y":'+getY(3)+', "x":'+getX(2)+'},'+
+  	  '"1028":{"y":'+getY(3)+', "x":'+getX(3)+'},'+
+  	  '"1029":{"y":'+getY(3)+', "x":'+getX(4)+'},'+
+  	  '"1030":{"y":'+getY(3)+', "x":'+getX(5)+'},'+
+  	  '"1031":{"y":'+getY(3)+', "x":'+getX(6)+'},'+
+  	  '"1032":{"y":'+getY(3)+', "x":'+getX(7)+'},'+
+  	  '"1033":{"y":'+getY(4)+', "x":'+getX(0)+'},'+
+  	  '"1034":{"y":'+getY(4)+', "x":'+getX(1)+'},'+
+  	  '"1035":{"y":'+getY(4)+', "x":'+getX(2)+'},'+
+  	  '"1036":{"y":'+getY(4)+', "x":'+getX(3)+'},'+
+  	  '"1037":{"y":'+getY(4)+', "x":'+getX(4)+'},'+
+  	  '"1038":{"y":'+getY(4)+', "x":'+getX(5)+'},'+
+  	  '"1039":{"y":'+getY(4)+', "x":'+getX(6)+'},'+
+  	  '"1040":{"y":'+getY(4)+', "x":'+getX(7)+'},'+
+  	  '"1041":{"y":'+getY(5)+', "x":'+getX(0)+'},'+
+  	  '"1042":{"y":'+getY(5)+', "x":'+getX(1)+'},'+
+  	  '"1043":{"y":'+getY(5)+', "x":'+getX(2)+'},'+
+  	  '"1044":{"y":'+getY(5)+', "x":'+getX(3)+'},'+
+  	  '"1045":{"y":'+getY(5)+', "x":'+getX(4)+'},'+
+  	  '"1046":{"y":'+getY(5)+', "x":'+getX(5)+'},'+
+  	  '"1047":{"y":'+getY(5)+', "x":'+getX(6)+'},'+
+  	  '"1048":{"y":'+getY(5)+', "x":'+getX(7)+'},'+
+  	  '"1049":{"y":'+getY(6)+', "x":'+getX(0)+'},'+
+  	  '"1050":{"y":'+getY(6)+', "x":'+getX(1)+'},'+
+  	  '"1051":{"y":'+getY(6)+', "x":'+getX(2)+'},'+
+  	  '"1052":{"y":'+getY(6)+', "x":'+getX(3)+'},'+
+  	  '"1053":{"y":'+getY(6)+', "x":'+getX(4)+'},'+
+  	  '"1054":{"y":'+getY(6)+', "x":'+getX(5)+'},'+
+  	  '"1055":{"y":'+getY(6)+', "x":'+getX(6)+'},'+
+  	  '"1056":{"y":'+getY(6)+', "x":'+getX(7)+'},'+
+  	  '"1057":{"y":'+getY(7)+', "x":'+getX(0)+'},'+
+  	  '"1058":{"y":'+getY(7)+', "x":'+getX(1)+'},'+
+  	  '"1059":{"y":'+getY(7)+', "x":'+getX(2)+'},'+
+  	  '"1060":{"y":'+getY(7)+', "x":'+getX(3)+'},'+
+  	  '"1061":{"y":'+getY(7)+', "x":'+getX(4)+'},'+
+  	  '"1062":{"y":'+getY(7)+', "x":'+getX(5)+'},'+
+  	  '"1063":{"y":'+getY(7)+', "x":'+getX(6)+'},'+
+  	  '"1064":{"y":'+getY(7)+', "x":'+getX(7)+'}}';
+  	  gridlocation = eval('(' + str + ')');
+  }
+  
+  function initieces(){
+  	setLocation("blacktower1", 1001);
+  	setLocation("blackhorse1", 1009);
+  	setLocation("blackphase1", 1017);
+  	setLocation("blackking", 1025);
+  	setLocation("blackqueen", 1033);
+  	setLocation("blackphase2", 1041);
+  	setLocation("blackhorse2", 1049);
+  	setLocation("blacktower2", 1057);
+  	setLocation("blacksoldiers1", 1002);
+  	setLocation("blacksoldiers2", 1010);
+  	setLocation("blacksoldiers3", 1018);
+  	setLocation("blacksoldiers4", 1026);
+  	setLocation("blacksoldiers5", 1034);
+  	setLocation("blacksoldiers6", 1042);
+  	setLocation("blacksoldiers7", 1050);
+  	setLocation("blacksoldiers8", 1058);
+  	
+  	setLocation("whitetower1", 1008);
+  	setLocation("whitehorse1", 1016);
+  	setLocation("whitephase1", 1024);
+  	setLocation("whiteking", 1032);
+  	setLocation("whitequeen", 1040);
+  	setLocation("whitephase2", 1048);
+  	setLocation("whitehorse2", 1056);
+  	setLocation("whitetower2", 1064);
+  	setLocation("whitesoldiers1", 1007);
+  	setLocation("whitesoldiers2", 1015);
+  	setLocation("whitesoldiers3", 1023);
+  	setLocation("whitesoldiers4", 1031);
+  	setLocation("whitesoldiers5", 1039);
+  	setLocation("whitesoldiers6", 1047);
+  	setLocation("whitesoldiers7", 1055);
+  	setLocation("whitesoldiers8", 1063);
+  }
+  
+  function move(name, location){
+  	var doc=document.getElementById(name);
+  	var isOk = false;
+  	while(!isOk){
+  		if(gridlocation[location].x > doc.style.left){
+  			doc.style.left = doc.style.left + 10;
+  		}else{
+  			doc.style.left = gridlocation[location].x;
+  		}
+	  	if(gridlocation[location].y > doc.style.top){
+  			doc.style.top = doc.style.top + 10;
+  		}else{
+  			doc.style.top = gridlocation[location].y;
+  		}
+  		if(gridlocation[location].y >= doc.style.top && gridlocation[location].x >= doc.style.left){
+  			isOk = true;
+  		}
+  	}
+  }
+  
+  function setLocation(name, location){
+  	var doc=document.getElementById(name);
+  	doc.style.left = gridlocation[location].x;
+  	doc.style.top = gridlocation[location].y;
+  	
+  }
+</script>
+<style>
+	#board{
+		margin-top:100px;
+		background-color: #3ABA63;
+		border: 20px solid #9A7662;
+	}
+	div{
+		text-align: center;
+	}
+</style>
+</head>
+ 
+<body onload="drawShape();">
+  <div>
+  <button onclick="setLocation('blacksoldiers1', 1004)" style="position: absolute;">走一步</button>
+    <canvas id="board" width="800px" height="800px"></canvas>
+    <img src="image/black_tower.png" id="blacktower1" style="position: absolute;"/>
+    <img src="image/black_tower.png" id="blacktower2" style="position: absolute;"/>
+    <img src="image/black_horse.png" id="blackhorse1" style="position: absolute;"/>
+    <img src="image/black_horse.png" id="blackhorse2" style="position: absolute;"/>
+    <img src="image/black_phase.png" id="blackphase1" style="position: absolute;"/>
+    <img src="image/black_phase.png" id="blackphase2" style="position: absolute;"/>
+    <img src="image/black_king.png" id="blackking" style="position: absolute;"/>
+    <img src="image/black_queen.png" id="blackqueen" style="position: absolute;"/>
+    <img src="image/black_soldiers.png" id="blacksoldiers1" style="position: absolute;"/>
+    <img src="image/black_soldiers.png" id="blacksoldiers2" style="position: absolute;"/>
+    <img src="image/black_soldiers.png" id="blacksoldiers3" style="position: absolute;"/>
+    <img src="image/black_soldiers.png" id="blacksoldiers4" style="position: absolute;"/>
+    <img src="image/black_soldiers.png" id="blacksoldiers5" style="position: absolute;"/>
+    <img src="image/black_soldiers.png" id="blacksoldiers6" style="position: absolute;"/>
+    <img src="image/black_soldiers.png" id="blacksoldiers7" style="position: absolute;"/>
+    <img src="image/black_soldiers.png" id="blacksoldiers8" style="position: absolute;"/>
+    
+    
+    <img src="image/white_tower.png" id="whitetower1" style="position: absolute;"/>
+    <img src="image/white_tower.png" id="whitetower2" style="position: absolute;"/>
+    <img src="image/white_horse.png" id="whitehorse1" style="position: absolute;"/>
+    <img src="image/white_horse.png" id="whitehorse2" style="position: absolute;"/>
+    <img src="image/white_phase.png" id="whitephase1" style="position: absolute;"/>
+    <img src="image/white_phase.png" id="whitephase2" style="position: absolute;"/>
+    <img src="image/white_king.png" id="whiteking" style="position: absolute;"/>
+    <img src="image/white_queen.png" id="whitequeen" style="position: absolute;"/>
+    <img src="image/white_soldiers.png" id="whitesoldiers1" style="position: absolute;"/>
+    <img src="image/white_soldiers.png" id="whitesoldiers2" style="position: absolute;"/>
+    <img src="image/white_soldiers.png" id="whitesoldiers3" style="position: absolute;"/>
+    <img src="image/white_soldiers.png" id="whitesoldiers4" style="position: absolute;"/>
+    <img src="image/white_soldiers.png" id="whitesoldiers5" style="position: absolute;"/>
+    <img src="image/white_soldiers.png" id="whitesoldiers6" style="position: absolute;"/>
+    <img src="image/white_soldiers.png" id="whitesoldiers7" style="position: absolute;"/>
+    <img src="image/white_soldiers.png" id="whitesoldiers8" style="position: absolute;"/>
+  </div>
+</body>
+</html>
+</html>
